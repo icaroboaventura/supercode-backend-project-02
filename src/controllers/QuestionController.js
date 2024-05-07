@@ -22,7 +22,20 @@ async function createQuestionToQuizCtrl(req, res) {
   }
 }
 
+async function deleteQuestionCtrl(req, res) {
+  try {
+    const questionId = req.params.questionId;
+    console.log(questionId);
+    const deletedQuestion = await QuestionService.deleteQuestion(questionId);
+    res.json(deletedQuestion);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ err, message: "Could not add new recipe" });
+  }
+}
+
 export const QuestionController = {
   getAllQuestionsCtrl,
   createQuestionToQuizCtrl,
+  deleteQuestionCtrl,
 };
